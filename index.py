@@ -30,13 +30,26 @@ def addTask(tasks):
 #########################################
 
 def deleteTask(tasks):
-    pass
+    showTasks(tasks)
+    if tasks:
+        try:
+            taskNum=int(input("\tChoose the task number you want to delete: "))
+            if 1 <= taskNum <= len(tasks):
+                deletedTask=tasks.pop(taskNum-1)
+                saveTasks(tasks)
+                print("\tTask deleted succesfully!")
+            else:
+                print("\tThis task number doesn't exist!")
+        except ValueError:
+            print("\tEnter a numerical value!")
+    else:
+        print("\tThere are no tasks to delete!")
 
 #########################################
 
 def markAsComplete(tasks):
     task=input("\tChoose the task number you want to mark as completed: ")
-    
+
 
 #########################################
 
@@ -44,7 +57,7 @@ def saveTasks(tasks):
     try:
         with open("tasks.txt", "w") as taskFile:
             for task in tasks:
-                taskFile.write(f'{task["task"]}|{"yes" if task["completed"]=="yes" else "no"}')
+                taskFile.write(f'{task["task"]}|{"yes" if task["completed"]=="yes" else "no"}\n')
     except FileNotFoundError:
         print("file is not found")
 
@@ -64,7 +77,7 @@ def main():
             addTask(tasks)
 
         elif(choice=="3"):
-            deleteTask()
+            deleteTask(tasks)
 
         elif(choice=="4"):
             markAsComplete()
