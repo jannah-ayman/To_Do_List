@@ -6,7 +6,9 @@ def load():
                 task,completed=line.strip().split("|")
                 taskList.append({"task":task,"completed":completed})
     except FileNotFoundError:
-        print("file is not found")
+        print("\tFile not found. Creating a new 'tasks.txt' file. . .")
+        with open("tasks.txt", "w") as taskFile:
+            pass 
     return taskList
 
 #########################################
@@ -48,8 +50,20 @@ def deleteTask(tasks):
 #########################################
 
 def markAsComplete(tasks):
-    task=input("\tChoose the task number you want to mark as completed: ")
-
+    showTasks(tasks)
+    if tasks:
+        try:
+            taskNum=int(input("\tChoose the task number you want to mark as completed: "))
+            if 1 <= taskNum <= len(tasks):
+                tasks[taskNum-1]["completed"]="yes"
+                saveTasks(tasks)
+                print("\tTask marked as completed succesfully!")
+            else:
+                print("\tThis task number doesn't exist!")
+        except ValueError:
+            print("\tEnter a numerical value!")
+    else:
+        print("\tThere are no tasks to mark as complete!")
 
 #########################################
 
@@ -80,10 +94,10 @@ def main():
             deleteTask(tasks)
 
         elif(choice=="4"):
-            markAsComplete()
+            markAsComplete(tasks)
 
         elif(choice=="5"):
-            saveTasks()
+            print("\tGoodbye!")
             break
         else:
             print("\n\tInvalid choice!")
