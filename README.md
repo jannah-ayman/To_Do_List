@@ -45,14 +45,14 @@ Changes are automatically saved after any modification.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/todo-cli.git
-   cd todo-cli
+   git clone https://github.com/jannah-ayman/To_Do_List
+   cd To_Do_List
    ```
 
 2. Run the program:
 
    ```bash
-   python todo.py
+   python index.py
    ```
 
 3. Use the on-screen menu to interact with your to-do list.
